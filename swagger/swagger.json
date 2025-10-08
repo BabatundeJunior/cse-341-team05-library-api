@@ -11,7 +11,7 @@
       "description": "Local server"
     },
     {
-      "url": "https://your-live-render-url.onrender.com",
+      "url": "https://cse-341-team05-library-api.onrender.com/",
       "description": "Render server"
     }
   ],
