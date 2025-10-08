@@ -1,6 +1,7 @@
 const Loan = require('../models/Loan');
 const Book = require('../models/Book');
 const User = require('../models/User');
+const { validationResult } = require('express-validator');
 
 // GET all loans
 exports.getAllLoans = async (req, res) => {
@@ -25,6 +26,10 @@ exports.getLoanById = async (req, res) => {
 
 // POST create a new loan
 exports.createLoan = async (req, res) => {
+          const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+    }
   const loan = new Loan({
     userId: req.body.userId,
     bookId: req.body.bookId,
@@ -43,6 +48,10 @@ exports.createLoan = async (req, res) => {
 
 // PUT update a loan
 exports.updateLoan = async (req, res) => {
+          const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+    }
   try {
     const loan = await Loan.findById(req.params.id);
     if (!loan) return res.status(404).json({ message: 'Loan not found' });
@@ -62,6 +71,10 @@ exports.updateLoan = async (req, res) => {
 
 // DELETE loan
 exports.deleteLoan = async (req, res) => {
+          const errors = validationResult(req);
+      if (!errors.isEmpty()) {
+      return res.status(400).json({ errors: errors.array() });
+      }
   try {
     const result = await Loan.findByIdAndDelete(req.params.id);
     if (!result) return res.status(404).json({ message: 'Loan not found' });

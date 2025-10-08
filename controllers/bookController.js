@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator');
 const Book = require('../models/Book');
 
 // GET all books
@@ -23,6 +24,10 @@ exports.getBookById = async (req, res) => {
 
 // POST create a new book
 exports.createBook = async (req, res) => {
+          const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+    }
   const book = new Book({
     title: req.body.title,
     isbn: req.body.isbn,
@@ -43,6 +48,10 @@ exports.createBook = async (req, res) => {
 
 // PUT update a book
 exports.updateBook = async (req, res) => {
+          const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+    }
   try {
     const book = await Book.findById(req.params.id);
     if (!book) return res.status(404).json({ message: 'Book not found' });
@@ -65,6 +74,10 @@ exports.updateBook = async (req, res) => {
 
 // DELETE a book
 exports.deleteBook = async (req, res) => {
+          const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+    }
   try {
     const result = await Book.findByIdAndDelete(req.params.id);
     if (!result) return res.status(404).json({ message: 'Book not found' });

@@ -1,3 +1,4 @@
+const { validationResult } = require('express-validator');
 const Author = require('../models/Author');
 
 // GET all authors
@@ -23,6 +24,10 @@ exports.getAuthorById = async (req, res) => {
 
 // POST create a new author
 exports.createAuthor = async (req, res) => {
+          const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+    }
   const author = new Author({
     name: req.body.name,
     biography: req.body.biography,
@@ -40,6 +45,10 @@ exports.createAuthor = async (req, res) => {
 
 // PUT update author
 exports.updateAuthor = async (req, res) => {
+          const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+    }
   try {
     const author = await Author.findById(req.params.id);
     if (!author) return res.status(404).json({ message: 'Author not found' });
@@ -58,6 +67,10 @@ exports.updateAuthor = async (req, res) => {
 
 // DELETE author
 exports.deleteAuthor = async (req, res) => {
+          const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+    return res.status(400).json({ errors: errors.array() });
+    }
   try {
     const result = await Author.findByIdAndDelete(req.params.id);
     if (!result) return res.status(404).json({ message: 'Author not found' });
