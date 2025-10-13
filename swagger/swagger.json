@@ -40,6 +40,11 @@
       },
       "post": {
         "summary": "Add a new book",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "requestBody": {
           "required": true,
           "content": {
@@ -56,6 +61,9 @@
           },
           "400": {
             "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "tags": [
@@ -66,6 +74,11 @@
     "/books/{id}": {
       "get": {
         "summary": "Get a book by ID",
+        "security": [
+          {
+            "bearerAuth": []
+          }
+        ],
         "parameters": [
           {
             "name": "id",
@@ -82,6 +95,9 @@
           },
           "404": {
             "description": "Book not found"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "tags": [
@@ -119,10 +135,18 @@
           },
           "404": {
             "description": "Book not found"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "tags": [
           "Books"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ]
       },
       "delete": {
@@ -143,10 +167,18 @@
           },
           "404": {
             "description": "Book not found"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "tags": [
           "Books"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ]
       }
     },
@@ -190,10 +222,18 @@
           },
           "400": {
             "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "tags": [
           "Authors"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ]
       }
     },
@@ -253,10 +293,18 @@
           },
           "404": {
             "description": "Author not found"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "tags": [
           "Authors"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ]
       },
       "delete": {
@@ -277,10 +325,18 @@
           },
           "404": {
             "description": "Author not found"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "tags": [
           "Authors"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ]
       }
     },
@@ -324,10 +380,18 @@
           },
           "400": {
             "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "tags": [
           "Loans"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ]
       }
     },
@@ -387,10 +451,18 @@
           },
           "404": {
             "description": "Loan not found"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "tags": [
           "Loans"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ]
       },
       "delete": {
@@ -411,10 +483,18 @@
           },
           "404": {
             "description": "Loan not found"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "tags": [
           "Loans"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ]
       }
     },
@@ -458,10 +538,18 @@
           },
           "400": {
             "description": "Validation error"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "tags": [
           "Users"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ]
       }
     },
@@ -521,10 +609,18 @@
           },
           "404": {
             "description": "User not found"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "tags": [
           "Users"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ]
       },
       "delete": {
@@ -545,10 +641,18 @@
           },
           "404": {
             "description": "User not found"
+          },
+          "401": {
+            "description": "Unauthorized"
           }
         },
         "tags": [
           "Users"
+        ],
+        "security": [
+          {
+            "bearerAuth": []
+          }
         ]
       }
     }
@@ -665,6 +769,13 @@
             ]
           }
         }
+      }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
       }
     }
   },

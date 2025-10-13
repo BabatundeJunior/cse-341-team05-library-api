@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const loanController = require('../controllers/loanController');
 const { validateLoan, validateLoanId } = require('../validators/loanValidator');
+const verifyToken = require('../middleware/verifyToken');
 
 // GET all loans
 router.get('/', loanController.getAllLoans);
@@ -10,12 +11,12 @@ router.get('/', loanController.getAllLoans);
 router.get('/:id', validateLoanId, loanController.getLoanById);
 
 // POST new loan
-router.post('/', validateLoan, loanController.createLoan);
+router.post('/',verifyToken, validateLoan, loanController.createLoan);
 
 // PUT update loan
-router.put('/:id', [...validateLoanId, ...validateLoan], loanController.updateLoan);
+router.put('/:id',verifyToken, [...validateLoanId, ...validateLoan], loanController.updateLoan);
 
 // DELETE loan
-router.delete('/:id', validateLoanId, loanController.deleteLoan);
+router.delete('/:id',verifyToken, validateLoanId, loanController.deleteLoan);
 
 module.exports = router;

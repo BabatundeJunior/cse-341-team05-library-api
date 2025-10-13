@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const userController = require('../controllers/userController');
 const { validateUser, validateUserId } = require('../validators/userValidator');
+const verifyToken = require('../middleware/verifyToken');
 
 // GET all users
 router.get('/', userController.getAllUsers);
@@ -10,12 +11,12 @@ router.get('/', userController.getAllUsers);
 router.get('/:id', validateUserId, userController.getUserById);
 
 // POST new user
-router.post('/', validateUser, userController.createUser);
+router.post('/',verifyToken, validateUser, userController.createUser);
 
 // PUT update user
-router.put('/:id', [...validateUserId, ...validateUser], userController.updateUser);
+router.put('/:id',verifyToken, [...validateUserId, ...validateUser], userController.updateUser);
 
 // DELETE user
-router.delete('/:id', validateUserId, userController.deleteUser);
+router.delete('/:id',verifyToken, validateUserId, userController.deleteUser);
 
 module.exports = router;

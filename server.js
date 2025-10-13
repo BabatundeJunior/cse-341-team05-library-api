@@ -1,17 +1,20 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const dotenv = require('dotenv');
+dotenv.config();
 const session = require('express-session');
 const passport = require('passport');
 const swaggerUi = require('swagger-ui-express');
 const swaggerDoc = require('./swagger/swagger.json');
 const cors = require('cors');
+require('./auth/passport');
 
-// Load env variables
-dotenv.config();
+
+
 
 // Initialize app
 const app = express();
+
 const PORT = process.env.PORT || 3000;
 
 // Middleware
@@ -48,7 +51,7 @@ app.use('/books', require('./routes/books'));
 app.use('/authors', require('./routes/authors'));
 app.use('/users', require('./routes/users'));
 app.use('/loans', require('./routes/loans'));
-// app.use('/auth', require('./routes/auth')); 
+app.use('/auth', require('./routes/auth')); 
 
 // Start server
 app.listen(PORT, () => {
