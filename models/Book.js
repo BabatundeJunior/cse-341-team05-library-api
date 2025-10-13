@@ -25,11 +25,11 @@ const bookSchema = new mongoose.Schema(
       required: true
     },
     availableCopies: {
-      type: Number,
+      type: String,
       required: true
     },
     totalCopies: {
-      type: Number,
+      type: String,
       required: true
     },
     authorId: {
